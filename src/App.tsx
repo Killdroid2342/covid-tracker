@@ -26,6 +26,7 @@ const App: React.FC = () => {
       })
       .then((data) => {
         setTotal(data);
+        console.log(data);
       });
   };
 
@@ -33,35 +34,58 @@ const App: React.FC = () => {
     <>
       <h1 className='text-center text-white'>Total Covid Cases</h1>
       <div>
-        <div className='flex flex-row'>
-          <p
-            className='cursor-pointer border-2 border-white bg-transparent text-white placeholder-white rounded-md text-center p-3 font-bold m-auto flex flex-col'
-            onClick={() => {
-              setIsModalOpen(true);
-              fetchData('worldwide');
-            }}
-          >
-            Get WorldWide cases
-          </p>
-          <p
-            className='cursor-pointer border-2 border-white bg-transparent text-white placeholder-white rounded-md text-center p-3 font-bold m-auto flex flex-col'
-            onClick={() => {
-              setIsModalOpen(true);
-              fetchData('uk');
-            }}
-          >
-            UK Cases
-          </p>
-          <p
-            className='cursor-pointer border-2 border-white bg-transparent text-white placeholder-white rounded-md text-center p-3 font-bold m-auto flex flex-col'
-            onClick={() => {
-              setIsModalOpen(true);
-              fetchData('usa');
-            }}
-          >
-            USA Cases
-          </p>
-        </div>
+        <table>
+          <tbody>
+            <tr>
+              <th></th>
+              <th>Deaths</th>
+              <th>Recovered</th>
+              <th>Cases</th>
+            </tr>
+            <tr>
+              <td
+                className='border border-green-900 cursor-pointer text-white'
+                onClick={() => {
+                  setIsModalOpen(true);
+                  fetchData('worldwide');
+                }}
+              >
+                WorldWide
+              </td>
+              <td className='border border-green-900'>Deaths</td>
+              <td className='border border-green-900'>Recovered</td>
+              <td className='border border-green-900'>Cases</td>
+            </tr>
+            <tr>
+              <td
+                className='border border-green-900 cursor-pointer text-white'
+                onClick={() => {
+                  setIsModalOpen(true);
+                  fetchData('uk');
+                }}
+              >
+                UK
+              </td>
+              <td className='border border-green-900'>Deaths</td>
+              <td className='border border-green-900'>Recovered</td>
+              <td className='border border-green-900'>Cases</td>
+            </tr>
+            <tr>
+              <td
+                className='border border-green-900 cursor-pointer text-white'
+                onClick={() => {
+                  setIsModalOpen(true);
+                  fetchData('usa');
+                }}
+              >
+                USA
+              </td>
+              <td className='border border-green-900'>Deaths</td>
+              <td className='border border-green-900'>Recovered</td>
+              <td className='border border-green-900'>Cases</td>
+            </tr>
+          </tbody>
+        </table>
         {isModalOpen && (
           <div className='modal'>
             <div className='text-center border-2 border-white'>
