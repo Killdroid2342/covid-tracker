@@ -1,6 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { TCountryData } from '../../App';
 
-const Table = ({ setIsModalOpen, fetchData, total }: any) => {
+interface Props {
+  setIsModalOpen: any;
+  countryData: TCountryData[];
+}
+
+const Table = ({ setIsModalOpen, countryData }: Props) => {
+  const handleRowClick = (data: TCountryData) => {
+    setIsModalOpen(true);
+  };
+
+  console.log('COUNTRY DATA', countryData);
   return (
     <div>
       <table>
@@ -11,48 +22,25 @@ const Table = ({ setIsModalOpen, fetchData, total }: any) => {
             <th>Recovered</th>
             <th>Cases</th>
           </tr>
-          <tr>
-            <td
-              className='border border-green-900 cursor-pointer text-white'
-              onClick={() => {
-                setIsModalOpen(true);
-                fetchData('worldwide');
-              }}
-            >
-              WorldWide
-            </td>
-            <td className='border border-green-900'>Deaths{total?.cases}</td>
-            <td className='border border-green-900'>Recovered</td>
-            <td className='border border-green-900'>Cases</td>
-          </tr>
-          <tr>
-            <td
-              className='border border-green-900 cursor-pointer text-white'
-              onClick={() => {
-                setIsModalOpen(true);
-                fetchData('uk');
-              }}
-            >
-              UK
-            </td>
-            <td className='border border-green-900'>Deaths</td>
-            <td className='border border-green-900'>Recovered</td>
-            <td className='border border-green-900'>Cases</td>
-          </tr>
-          <tr>
-            <td
-              className='border border-green-900 cursor-pointer text-white'
-              onClick={() => {
-                setIsModalOpen(true);
-                fetchData('usa');
-              }}
-            >
-              USA
-            </td>
-            <td className='border border-green-900'>Deaths</td>
-            <td className='border border-green-900'>Recovered</td>
-            <td className='border border-green-900'>Cases</td>
-          </tr>
+          {countryData.map((data) => (
+            <tr>
+              <td
+                className='border border-green-900 cursor-pointer text-white'
+                onClick={() => handleRowClick(data)}
+              >
+                {data.name}
+              </td>
+              <td className='border border-green-900'>
+                {data.data && data.data.deaths}
+              </td>
+              <td className='border border-green-900'>
+                {data.data && data.data.recovered}
+              </td>
+              <td className='border border-green-900'>
+                {data.data && data.data.cases}
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>
