@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Modal from './components/Modal/Modal';
 import Table from './components/Table/Table';
 
@@ -8,42 +8,55 @@ interface Data {
   cases: number;
 }
 
+export interface TCountryData {
+  name: string;
+  code: string;
+  data?: Data;
+}
+
+const countries: TCountryData[] = [
+  { name: 'WorldWide', code: 'all' },
+  { name: 'UK', code: 'gb' },
+  { name: 'USA', code: 'us' },
+];
+
 const App: React.FC = () => {
-  const [total, setTotal] = useState<Data | undefined>();
+  const [countryData, setCountryData] = useState<TCountryData[]>(countries);
+  const [selectedData, setSelectedData] = useState<TCountryData | undefined>();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const fetchData = (country: string) => {
-    let url = `https://disease.sh/v3/covid-19/all`;
+  const fetchData = async (country: TCountryData[]) => {
+    let tempList: TCountryData[] = [];
+    countries.forEach(async (country, i) => {
+      let url = `https://disease.sh/v3/covid-19/countries/${country.name}`;
+      if (country.code == 'all') {
+        url = `https://disease.sh/v3/covid-19/${country.code}`;
+      }
+      const data = await fetch(url)
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+          country.data = data;
+          return country;
+        });
 
-    if (country === 'uk') {
-      url = `https://disease.sh/v3/covid-19/countries/gb`;
-    } else if (country === 'usa') {
-      url = `https://disease.sh/v3/covid-19/countries/us`;
-    }
-
-    fetch(url)
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        setTotal(data);
-        console.log(data);
-      });
+      tempList.push(data);
+      if (i == countries.length) {
+        setCountryData(tempList);
+      }
+    });
   };
+
+  useEffect(() => {
+    fetchData(countries);
+  }, []);
 
   return (
     <>
       <h1 className='text-center text-white'>Total Covid Cases</h1>
-      <Table
-        total={total}
-        setIsModalOpen={setIsModalOpen}
-        fetchData={fetchData}
-      />
-      <Modal
-        isModalOpen={isModalOpen}
-        total={total}
-        setIsModalOpen={setIsModalOpen}
-      />
+      <Table countryData={countryData} setIsModalOpen={setIsModalOpen} />
+      <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
     </>
   );
 };
