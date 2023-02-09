@@ -55,8 +55,16 @@ const App: React.FC = () => {
   return (
     <>
       <h1 className='text-center text-white'>Total Covid Cases</h1>
-      <Table countryData={countryData} setIsModalOpen={setIsModalOpen} />
-      <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+      <Table
+        countryData={countryData}
+        setIsModalOpen={setIsModalOpen}
+        setSelectedData={setSelectedData}
+      />
+      <Modal
+        isModalOpen={isModalOpen}
+        setIsModalOpen={setIsModalOpen}
+        selectedData={selectedData}
+      />
     </>
   );
 };
