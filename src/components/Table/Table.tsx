@@ -4,10 +4,12 @@ import { TCountryData } from '../../App';
 interface Props {
   setIsModalOpen: any;
   countryData: TCountryData[];
+  setSelectedData: any;
 }
 
-const Table = ({ setIsModalOpen, countryData }: Props) => {
+const Table = ({ setIsModalOpen, countryData, setSelectedData }: Props) => {
   const handleRowClick = (data: TCountryData) => {
+    setSelectedData(data);
     setIsModalOpen(true);
   };
 
@@ -22,8 +24,8 @@ const Table = ({ setIsModalOpen, countryData }: Props) => {
             <th>Recovered</th>
             <th>Cases</th>
           </tr>
-          {countryData.map((data) => (
-            <tr>
+          {countryData.map((data, i) => (
+            <tr key={i}>
               <td
                 className='border border-green-900 cursor-pointer text-white'
                 onClick={() => handleRowClick(data)}

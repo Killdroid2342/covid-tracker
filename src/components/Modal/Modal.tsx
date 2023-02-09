@@ -4,9 +4,10 @@ import PieChart from './PieChart/PieChart';
 interface Props {
   isModalOpen: boolean;
   setIsModalOpen: (value: boolean) => void;
+  selectedData: any;
 }
 
-const Modal = ({ isModalOpen, setIsModalOpen }: Props) => {
+const Modal = ({ isModalOpen, setIsModalOpen, selectedData }: Props) => {
   return (
     <div>
       {isModalOpen && (
@@ -15,18 +16,18 @@ const Modal = ({ isModalOpen, setIsModalOpen }: Props) => {
             <div className='border-2 border-white flex flex-row'>
               <div className='text-white border-2 border-red-900'>
                 <p>Total Death</p>
-                {/* {total ? total.deaths : ''} */}
+                {selectedData ? selectedData.data.deaths : ''}
               </div>
               <div className='text-white border-2 border-green-900'>
                 <p>Total Recovered</p>
-                {/* {total ? total.recovered : ''} */}
+                {selectedData ? selectedData.data.recovered : ''}
               </div>
               <div className='text-white border-2 border-yellow-400'>
                 <p>Total Cases</p>
-                {/* {total ? total.cases : ''} */}
+                {selectedData ? selectedData.data.cases : ''}
               </div>
             </div>
-            <PieChart total={{}} />
+            <PieChart total={selectedData && selectedData.data} />
             <button
               onClick={() => setIsModalOpen(false)}
               className='text-red-800'
