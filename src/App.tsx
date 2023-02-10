@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import Modal from './components/Modal/Modal';
-import Table from './components/Table/Table';
+import React, { useState, useEffect } from "react";
+import Modal from "./components/Modal/Modal";
+import Table from "./components/Table/Table";
 
 interface Data {
   continent: number;
@@ -27,7 +27,7 @@ const App: React.FC = () => {
 
   const fetchData = async () => {
     let tempList: TCountryData[] = [];
-    await fetch('https://disease.sh/v3/covid-19/countries')
+    await fetch("https://disease.sh/v3/covid-19/countries")
       .then((res) => {
         return res.json();
       })
@@ -48,8 +48,8 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <>
-      <h1 className='text-center text-white'>Total Covid Cases</h1>
+    <div className="overflow-hidden h-full">
+      <h1 className="text-center text-white">Total Covid Cases</h1>
       <Table
         countryData={countryData}
         setIsModalOpen={setIsModalOpen}
@@ -60,7 +60,7 @@ const App: React.FC = () => {
         setIsModalOpen={setIsModalOpen}
         selectedData={selectedData}
       />
-    </>
+    </div>
   );
 };
 
