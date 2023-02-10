@@ -13,6 +13,9 @@ const Modal = ({ isModalOpen, setIsModalOpen, selectedData }: Props) => {
       {isModalOpen && (
         <div className='modal'>
           <div className='text-center border-2 border-white'>
+            <p className='text-white'>
+              {selectedData ? selectedData.name : ''}
+            </p>
             <div className='border-2 border-white flex flex-row'>
               <div className='text-white border-2 border-red-900'>
                 <p>Total Death</p>
