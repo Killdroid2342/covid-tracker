@@ -24,6 +24,7 @@ const App: React.FC = () => {
   const [countryData, setCountryData] = useState<TCountryData[]>([]);
   const [selectedData, setSelectedData] = useState<TCountryData | undefined>();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [search, setSearch] = useState('');
 
   const fetchData = async () => {
     let tempList: TCountryData[] = [];
@@ -47,6 +48,10 @@ const App: React.FC = () => {
     fetchData();
   }, []);
 
+  const filteredCountryData = countryData.filter((country) =>
+    country.name.toLowerCase().includes(search.toLowerCase())
+  );
+
   return (
     <div className='overflow-hidden h-full'>
       <h1 className='text-center text-white'>Total Covid Cases</h1>
@@ -55,13 +60,19 @@ const App: React.FC = () => {
           type='text'
           placeholder='Search country'
           className='text-center'
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
         />
       </form>
-      <Table
-        countryData={countryData}
-        setIsModalOpen={setIsModalOpen}
-        setSelectedData={setSelectedData}
-      />
+      {filteredCountryData.length === 0 ? (
+        <div className='text-center text-white'>No countries found</div>
+      ) : (
+        <Table
+          countryData={filteredCountryData}
+          setIsModalOpen={setIsModalOpen}
+          setSelectedData={setSelectedData}
+        />
+      )}
       <Modal
         isModalOpen={isModalOpen}
         setIsModalOpen={setIsModalOpen}
