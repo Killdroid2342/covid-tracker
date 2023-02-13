@@ -54,12 +54,14 @@ const App: React.FC = () => {
 
   return (
     <div className='overflow-hidden h-full'>
-      <h1 className='text-center text-white'>Total Covid Cases</h1>
-      <form action=''>
+      <h1 className='text-center text-white text-3xl font-bold mt-20'>
+        Total Covid Cases
+      </h1>
+      <form action='' className='flex flex-col items-center mt-10 mb-10'>
         <input
           type='text'
           placeholder='Search country'
-          className='text-center'
+          className='text-center rounded-md p-2 font-bold'
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
