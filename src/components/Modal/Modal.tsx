@@ -11,7 +11,7 @@ const Modal = ({ isModalOpen, setIsModalOpen, selectedData }: Props) => {
   if (!isModalOpen) return null;
   return (
     <div className='backdrop-blur-sm w-screen h-screen fixed top-0 left-0 flex justify-center items-center'>
-      <div className=' h-fit w-[540px] bg-slate-500 p-4 border-2 border-white rounded-lg relative'>
+      <div className=' h-fit w-[540px] bg-neutral-400 p-4 border-2 border-white rounded-lg relative'>
         <div className='text-center '>
           <p className='text-white font-bold text-2xl'>
             {selectedData ? selectedData.name : ''}
