@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Covid Tracker
 
 This Covid Tracker uses an API to get all of the countries, Deaths, Recovary and the people that are infected. If you were to click on a country, a graph would appear and it would visualize the data.
@@ -46,3 +47,6 @@ https://covid-tracker-six-kappa.vercel.app/
 ## Built With
 
 - React (TypeScript)
+=======
+This covid Tracker uses an API to get all of the countries, Deaths, Recovary and the people that are infected. If you were to click on a country, a graph would appear and it would visualize the data.
+>>>>>>> ed0b8f330784d24e403d35b0a134ef08fb2f1b1e
